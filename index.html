@@ -10,6 +10,7 @@
       <style>
          body {
             background: #333;
+            font-size: 1.5rem;
          }
          ::-webkit-scrollbar {
             width: 0;
@@ -43,7 +44,7 @@
          .card {
             color: #eee;
             padding: 10px 40px;
-            width: 300px;
+            width: 40vw;
             position: fixed;
             transition: all 0.5s ease;
             text-align: center;
@@ -55,24 +56,29 @@
          }
 
          img {
+            margin: 20px;
             height: 200px;
             width: auto;
             border-radius: 20px;
          }
+
+         .rotate {
+            transform: rotate(90deg);
+         }
       </style>
    </head>
    <body style="--percent: 100">
-      <div class="card bg-secondary left-card" style="bottom: 50px">
+      <div class="card bg-secondary left-card" style="bottom: 2vh">
          <b> Lightsaber dual </b>
          <div><img src="https://m.media-amazon.com/images/I/71CHJQcVrhL._AC_SX679_.jpg" /></div>
          <div>
             <a href="https://www.amazon.de/-/en/Lightsaber-Colours-Vibrating-Handles-Rechargeable/dp/B0B71PX6VY" target="_blank">Link 1</a>&nbsp;
             <a href="https://www.amazon.de/-/en/Lightsaber-Lightsabers-Directly-Together-Connectors/dp/B0CQLP9QGH/" target="_blank">Link 2</a>
          </div>
-         <div class="position-absolute end-0 top-50 translate-middle-y">●●●</div>
+         <div class="position-absolute end-0 top-50 translate-middle-y"><div class="rotate">●●●</div></div>
       </div>
 
-      <div class="card bg-secondary left-card" style="bottom: 350px">
+      <div class="card bg-secondary left-card" style="bottom: 30vh">
          <b>Блендер </b>
          <div><img src="https://www.rdveikals.lv/images/midi/60528321b909b5af5a53b51efe3c31a2.jpg" /></div>
          <a
@@ -80,10 +86,10 @@
             target="_blank"
             >Link</a
          >
-         <div class="position-absolute end-0 top-50 translate-middle-y">●●●</div>
+         <div class="position-absolute end-0 top-50 translate-middle-y"><div class="rotate">●●●</div></div>
       </div>
 
-      <div class="card bg-secondary right-card" style="bottom: 350px">
+      <div class="card bg-secondary right-card" style="bottom: 2vh">
          <b>Рубашка из эластена S</b>
          <div><img src="https://lv2.pigugroup.eu/colours/167/213/67/16721367/new-boy-krekls-black-mc706n-mc706nxl-819f9_reference.jpg" /></div>
          <a
@@ -91,14 +97,14 @@
             target="_blank"
             >Link</a
          >
-         <div class="position-absolute start-0 top-50 translate-middle-y">●●●</div>
+         <div class="position-absolute start-0 top-50 translate-middle-y"><div class="rotate">●●●</div></div>
       </div>
 
-      <div class="card bg-secondary right-card" style="bottom: 50px">
+      <div class="card bg-secondary right-card" style="bottom: 30vh">
          <b>Цветы</b>
          <div><img src="https://flordec.lv/image/cache/catalog/products/Artificial%20flowers/Bouqets/ZP016904-B-550x550.jpg" /></div>
          <a href="https://flordec.lv/iskusstvennye-cvety-i-rasteniya/cvety-i-bukety" target="_blank">Link</a>
-         <div class="position-absolute start-0 top-50 translate-middle-y">●●●</div>
+         <div class="position-absolute start-0 top-50 translate-middle-y"><div class="rotate">●●●</div></div>
       </div>
 
       <div class="h-75"></div>
