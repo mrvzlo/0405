@@ -11,7 +11,8 @@
 
       <style>
          body {
-            background: #333;
+            color: #eee;
+            background: #333339;
          }
          ::-webkit-scrollbar {
             width: 0;
@@ -52,12 +53,18 @@
 
          .card {
             color: #eee;
+            border-radius: 0;
             padding: 10px 40px;
             width: 300px;
             position: fixed;
             transition: all 0.3s ease;
             text-align: center;
-            border-radius: 40px;
+            text-shadow: 0 0 3px black;
+            background-color: #556d;
+            border-width: 1px;
+            border-left-width: 5px;
+            border-right-width: 5px;
+            border-color: #7afa;
          }
 
          a {
@@ -80,12 +87,38 @@
          }
          .translate-middle-y {
             width: 24px;
-            text-shadow: 0 0 3px black;
+         }
+         .btn {
+            min-width: 150px;
+            border-radius: 0;
+            border-width: 5px 1px 1px 1px;
+            background: #aaf4;
+            color: white;
+            transition: all 0.2s;
+            border-color: #7aff;
+         }
+
+         .btn:hover,
+         .btn:active {
+            background: #446a;
+            border-color: #7aff;
+         }
+         .line {
+            --bs-border-width: 3px;
+            color: #7afa;
+            opacity: 1;
+         }
+
+         .label {
+            border: solid;
+            border-width: 5px 1px 1px 1px;
+            background: #aaf4;
+            border-color: #7aff;
          }
       </style>
    </head>
    <body style="--percent: 100">
-      <div class="card bg-secondary left-card inactive" style="bottom: 350px">
+      <div class="card left-card inactive" style="bottom: 350px">
          <div><img src="https://m.media-amazon.com/images/I/71CHJQcVrhL._AC_SX679_.jpg" /></div>
          <div>
             <a href="https://www.amazon.de/-/en/Lightsaber-Colours-Vibrating-Handles-Rechargeable/dp/B0B71PX6VY" target="_blank">Link 1</a>&nbsp;
@@ -94,7 +127,7 @@
          <div class="position-absolute end-0 top-50 translate-middle-y"><div class="rotate-2">Что-то крутое</div></div>
       </div>
 
-      <div class="card bg-secondary left-card inactive" style="bottom: 50px">
+      <div class="card left-card inactive" style="bottom: 50px">
          <div><img src="https://www.rdveikals.lv/images/midi/60528321b909b5af5a53b51efe3c31a2.jpg" /></div>
          <a
             href="https://www.rdveikals.lv/categories/ru/250/sort/6/filter/0_0_0_135428.135430/page/1/%D0%91%D0%BB%D0%B5%D0%BD%D0%B4%D0%B5%D1%80%D1%8B.html"
@@ -104,7 +137,7 @@
          <div class="position-absolute end-0 top-50 translate-middle-y"><div class="rotate-2">Что-то практичное</div></div>
       </div>
 
-      <div class="card bg-secondary right-card inactive" style="bottom: 350px">
+      <div class="card right-card inactive" style="bottom: 350px">
          <div><img src="https://lv2.pigugroup.eu/colours/167/213/67/16721367/new-boy-krekls-black-mc706n-mc706nxl-819f9_reference.jpg" /></div>
          <a
             href="https://220.lv/ru/odezhda-obuv-aksessuary/muzhskaya-odezhda/muzhskie-rubashki?f%5B13157%5D%5B21402001%5D=elastan&f%5B13151%5D%5B506351%5D=s"
@@ -114,14 +147,27 @@
          <div class="position-absolute start-0 top-50 translate-middle-y"><div class="rotate">Что-то стильное</div></div>
       </div>
 
-      <div class="card bg-secondary right-card inactive" style="bottom: 50px">
+      <div class="card right-card inactive" style="bottom: 50px">
          <div><img src="https://flordec.lv/image/cache/catalog/products/Artificial%20flowers/Bouqets/ZP016904-B-550x550.jpg" /></div>
          <a href="https://flordec.lv/iskusstvennye-cvety-i-rasteniya/cvety-i-bukety" target="_blank">Link</a>
          <div class="position-absolute start-0 top-50 translate-middle-y"><div class="rotate">Что-то красивое</div></div>
       </div>
 
-      <div class="h-75"></div>
-      <div class="text-center"><button class="btn btn-success px-4" onclick="rrreset()">Что дарить?</button></div>
+      <hr class="my-0 line" />
+      <div class="h-75 text-center py-3">
+         <div id="countdown" class="font-monospace label mx-5 py-4 h1"></div>
+         <br />
+      </div>
+      <div class="text-center">
+         <a
+            class="btn"
+            target="_blank"
+            href="https://www.google.lv/maps/@57.0224776,23.4931766,3a,75y,29.47h,76.41t/data=!3m6!1e1!3m4!1soOwAk3CWVPu26-Ypuk7a8Q!2e0!7i16384!8i8192?entry=ttu"
+            >Где?</a
+         ><br />
+         <br />
+         <button class="btn" onclick="rrreset()">Что дарить?</button>
+      </div>
 
       <script>
          function getPercent() {
@@ -153,6 +199,27 @@
             });
          }
 
+         const targetDate = new Date('2024-05-04T16:00:00Z');
+         function updateCountdown() {
+            const currentDate = new Date();
+            const difference = targetDate - currentDate;
+
+            if (difference <= 0) {
+               clearInterval(intervalId);
+               document.getElementById('countdown').textContent = '0.00:00:00';
+            } else {
+               const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+               const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+               const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+               const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+               const dd = (x) => `${Math.floor(x / 10)}${x % 10}`;
+
+               document.getElementById('countdown').textContent = `${dd(days)}.${dd(hours)}:${dd(minutes)}:${dd(seconds)}`;
+            }
+         }
+
+         updateCountdown();
+         const intervalId = setInterval(updateCountdown, 1000);
          document.querySelectorAll('.card').forEach((element) => element.addEventListener('click', () => element.classList.toggle('active')));
       </script>
    </body>

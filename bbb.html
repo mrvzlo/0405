@@ -1,0 +1,213 @@
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+      <link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+         crossorigin="anonymous"
+      />
+
+      <style>
+         body {
+            color: #eee;
+            background: #334;
+         }
+         ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+         }
+
+         ::-webkit-scrollbar-track {
+            background: transparent;
+         }
+
+         ::-webkit-scrollbar-thumb {
+            background: transparent;
+         }
+
+         .left-card {
+            left: -260px;
+         }
+
+         .left-card.active {
+            left: -40px;
+         }
+
+         .left-card.inactive {
+            left: -300px;
+         }
+
+         .right-card {
+            right: -260px;
+         }
+
+         .right-card.active {
+            right: -40px;
+         }
+
+         .right-card.inactive {
+            right: -300px;
+         }
+
+         .card {
+            border-radius: 0;
+            color: #eee;
+            padding: 10px 40px;
+            width: 300px;
+            position: fixed;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-shadow: 0 0 3px black;
+            background-color: #556d;
+            border-width: 1px;
+            border-left-width: 5px;
+            border-right-width: 5px;
+            border-color: #7afa;
+         }
+
+         a {
+            color: #eee;
+         }
+
+         img {
+            margin: 10px 0;
+            height: 200px;
+            width: auto;
+            border-radius: 20px;
+         }
+
+         .rotate {
+            writing-mode: vertical-rl;
+         }
+         .rotate-2 {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+         }
+         .translate-middle-y {
+            width: 24px;
+         }
+         .btn {
+            min-width: 150px;
+            border-radius: 0;
+            border-width: 5px 1px 1px 1px;
+            background: #aaf4;
+            color: white;
+            transition: all 0.2s;
+            border-color: #7aff;
+         }
+
+         .btn:hover,
+         .btn:active {
+            background: #446a;
+            border-color: #7aff;
+         }
+         .line {
+            --bs-border-width: 3px;
+            color: #7afa;
+            opacity: 1;
+         }
+
+         .label {
+            border: solid;
+            border-width: 5px 1px 1px 1px;
+            background: #aaf4;
+            border-color: #7aff;
+         }
+      </style>
+   </head>
+   <body style="--percent: 100">
+      <div class="card left-card inactive" style="bottom: 350px">
+         <div><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Empty_frame.jpg" /></div>
+         <div>
+            <a href="">Link 1</a>&nbsp;
+            <a href="">Link 2</a>
+         </div>
+         <div class="position-absolute end-0 top-50 translate-middle-y"><div class="rotate-2">Label</div></div>
+      </div>
+
+      <div class="card left-card inactive" style="bottom: 50px">
+         <div><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Empty_frame.jpg" /></div>
+         <a href="">Link</a>
+         <div class="position-absolute end-0 top-50 translate-middle-y"><div class="rotate-2">Label</div></div>
+      </div>
+
+      <div class="card right-card inactive" style="bottom: 350px">
+         <div><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Empty_frame.jpg" /></div>
+         <a href="">Link</a>
+         <div class="position-absolute start-0 top-50 translate-middle-y"><div class="rotate">Label</div></div>
+      </div>
+
+      <div class="card right-card inactive" style="bottom: 50px">
+         <div><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Empty_frame.jpg" /></div>
+         <a href="">Link</a>
+         <div class="position-absolute start-0 top-50 translate-middle-y"><div class="rotate">Label</div></div>
+      </div>
+
+      <hr class="my-0 line" />
+      <div class="h-75 text-center py-3">
+         <div id="countdown" class="font-monospace label mx-5 py-4 h1"></div>
+         <br />
+      </div>
+      <div class="text-center">
+         <a class="btn" target="_blank" href="">Link</a><br />
+         <br />
+         <button class="btn" onclick="rrreset()">Button</button>
+      </div>
+
+      <script>
+         function getPercent() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.body.scrollHeight;
+            const spaceLeft = documentHeight - (scrollPosition + windowHeight);
+            return Math.round((100 * spaceLeft) / (documentHeight - windowHeight));
+         }
+
+         window.addEventListener('load', () => window.scrollTo(0, 0));
+         let lastKnownScrollPosition = 0;
+         let ticking = false;
+
+         document.addEventListener('scroll', (event) => {
+            lastKnownScrollPosition = window.scrollY;
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(() => {
+               document.body.style.setProperty('--percent', getPercent());
+               ticking = false;
+            });
+         });
+
+         function rrreset() {
+            document.querySelectorAll('.card').forEach((element) => {
+               element.classList.toggle('inactive');
+               element.classList.remove('active');
+            });
+         }
+
+         const targetDate = new Date('2024-05-04T16:00:00Z');
+         function updateCountdown() {
+            const currentDate = new Date();
+            const difference = targetDate - currentDate;
+
+            if (difference <= 0) {
+               clearInterval(intervalId);
+               document.getElementById('countdown').textContent = '0.00:00:00';
+            } else {
+               const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+               const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+               const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+               const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+               const dd = (x) => `${Math.floor(x / 10)}${x % 10}`;
+
+               document.getElementById('countdown').textContent = `${dd(days)}.${dd(hours)}:${dd(minutes)}:${dd(seconds)}`;
+            }
+         }
+
+         updateCountdown();
+         const intervalId = setInterval(updateCountdown, 1000);
+         document.querySelectorAll('.card').forEach((element) => element.addEventListener('click', () => element.classList.toggle('active')));
+      </script>
+   </body>
+</html>
