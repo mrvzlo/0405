@@ -276,8 +276,8 @@
             document.getElementById('countdown').textContent = `${dd(days)}.${dd(hours)}:${dd(minutes)}:${dd(seconds)}`;
          }
 
-         updateCountdown();
          const intervalId = setInterval(updateCountdown, 1000);
+         updateCountdown();
          document.querySelectorAll('.card').forEach((element) => element.addEventListener('click', () => element.classList.toggle('active')));
       </script>
    </body>
